@@ -1,0 +1,39 @@
+{
+  "name": "data-create-control",
+  "version": "2025.01.004",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "vitebuild": "vue-tsc --noEmit --skipLibCheck && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "^10.9.0",
+    "ant-design-vue": "^3.2.13",
+    "autoprefixer": "^10.4.14",
+    "axios": "^0.21.1",
+    "cropperjs": "^1.5.11",
+    "file-saver": "^2.0.5",
+    "fs-extra": "^10.1.0",
+    "hotkeys-js": "^3.8.7",
+    "lodash-es": "^4.17.21",
+    "vue": "^3.2.16",
+    "vue-loader": "^15.9.8",
+    "vue-router": "^4.0.11",
+    "vue3-angle": "^0.1.6",
+    "vue3-eventbus": "^2.0.0",
+    "vue3-lazy": "^1.0.0-alpha.1",
+    "vuedraggable": "^4.1.0",
+    "vuex": "^4.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "compressing": "^1.5.1",
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0",
+    "sass-resources-loader": "^2.2.5",
+    "vite": "^2.6.4",
+    "vue-tsc": "^0.3.0"
+  }
+}
