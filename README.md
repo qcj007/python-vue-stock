@@ -14,7 +14,7 @@ MAC:
 
 windows：
 创建虚拟环境：python3 -m venv venv
-激活虚拟环境：.\venv\Scripts\activate
+激活虚拟环境：venv\Scripts\activate.bat
 ```
 
 **3.初始化安装依赖：**
@@ -32,13 +32,13 @@ windows：
 1.打开根目录终端，激活虚拟环境
 2.启动python项目：python3 manage.py runserver
 3.打开/templates/vue的终端：npm run dev 
-4.打开网页
+4.打开网页:https://localhost:3000/
 ```
 **4.2一键启动**
 ```
 1.根目录下开启终端
-2.MAC: npm run dev  ||  yarn dev
-
+2.MAC: npm run start  ||  yarn start
+3.Windows: npm run dev  ||  yarn dev
 ```
 
 ### 页面：
