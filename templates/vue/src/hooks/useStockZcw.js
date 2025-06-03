@@ -231,7 +231,7 @@ export default () => {
 
   // 根据买入价调整止损位
   const onBuyPriceBlur = (addForm) => {
-    addForm.stopLoss = round(addForm.buyPrice * 0.95, 2)
+    addForm.stopLoss = round(addForm.buyPrice * 0.9, 2)
   }
 
   return {
