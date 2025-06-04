@@ -15,7 +15,7 @@ export default {
     return `${state.contHeight - 175}px`
   },
   offset(){
-    const dapan = 3050
+    const dapan = 3100
     return 0.9 + ((dapan -3000) / 100) * 0.1
   }
 }

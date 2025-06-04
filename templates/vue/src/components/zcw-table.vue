@@ -4,7 +4,7 @@
     :data-source="props.stocksList"
     :pagination="{ pageSize: 100 }"
     :scroll="{ x: 'max-content', y: props.tabHeight || tabHeight }"
-    :row-class-name="(_record, index) => (_record.syl <0 ? 'green greenBg' : null)"
+    :row-class-name="(_record, index) => ((_record.buyRate <10 && _record.oddsRate > 40 )? 'gold':_record.syl <0 ? 'green greenBg' : null)"
   >
     <template #bodyCell="{ column, text, record }">
       <template
