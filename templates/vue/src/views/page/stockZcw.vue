@@ -33,6 +33,7 @@
             style="width: 35%"
             placeholder="股票代码"
             @change="onCodeChange(addForm)"
+            ref="codeRef"
           />
           &nbsp;
           <span style="color: red" v-if="addForm.isExist">{{ addForm.name }}（已存在）</span>
@@ -94,6 +95,18 @@ const addFormObj = {
   isExist: "",
   industry: ""
 }
+
+const codeRef = ref(null)
+watch(
+  () => isEditShow.value,
+  () => {
+    if (isEditShow.value) {
+      setTimeout(() => {
+        codeRef.value.focus()
+      }, 100)
+    }
+  }
+)
 
 const addForm = ref(cloneDeep(addFormObj))
 

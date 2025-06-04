@@ -34,6 +34,7 @@
             style="width: 35%"
             placeholder="股票代码"
             @change="onCodeChange(addForm)"
+            ref="codeRef"
           />
           &nbsp;
 
@@ -107,6 +108,18 @@ import zcwTable from "@/components/zcw-table.vue"
 const dateFormat = "YYYY-MM-DD"
 const store = useStore()
 const isEditShow = ref(false)
+const codeRef = ref(null)
+watch(
+  () => isEditShow.value,
+  () => {
+    if (isEditShow.value) {
+      setTimeout(() => {
+        codeRef.value.focus()
+      }, 100)
+    }
+  }
+)
+
 
 const addFormObj = {
   code: "",
@@ -125,7 +138,7 @@ const addFormObj = {
 const addForm = ref(cloneDeep(addFormObj))
 
 const { columns, state, searchStockList, stocksList } = useStockEvents()
-const { onCodeChange, onAddZcwStock, onBuyPriceBlur,onEditStock } = useStockZcw()
+const { onCodeChange, onAddZcwStock, onBuyPriceBlur, onEditStock } = useStockZcw()
 const { exportEecel } = useExcel()
 
 const editEventData = ref({})
@@ -177,7 +190,7 @@ const handleExport = () => {
 
 // 新增
 const onAddStock = async () => {
-  const { stockTime, eventTime, code, house, name, eventRemark ,isExist} = addForm.value
+  const { stockTime, eventTime, code, house, name, eventRemark, isExist } = addForm.value
   if (code.length != 6) {
     message.warn("请输入正确的股票代码")
     return
@@ -190,7 +203,7 @@ const onAddStock = async () => {
       message.error("新增支撑位股票失败")
       return
     }
-  }else{
+  } else {
     const res = await onEditStock(addForm.value)
     if (!res) {
       message.error("修改股票失败")
@@ -198,7 +211,6 @@ const onAddStock = async () => {
     }
   }
 
-  
   const params = {
     id,
     code,

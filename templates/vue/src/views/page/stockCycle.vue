@@ -16,7 +16,12 @@
       </zcw-table>
     </div>
   </div>
-  <a-modal class="infoTips" v-model:visible="state.isEditShow" width="400px" @cancel="state.isEditShow = false">
+  <a-modal
+    class="infoTips"
+    v-model:visible="state.isEditShow"
+    width="400px"
+    @cancel="state.isEditShow = false"
+  >
     <template #title>
       <div class="info-header">新增股票</div>
     </template>
@@ -32,10 +37,13 @@
             v-model:value="addForm.code"
             style="width: 35%"
             placeholder="股票代码"
+            ref="codeRef"
             @change="onCodeChange(addForm)"
           />
           &nbsp;
-          <span style="color: red" v-if="state.codeList.includes(addForm.code)">{{ addForm.name }}（已存在）</span>
+          <span style="color: red" v-if="state.codeList.includes(addForm.code)">
+            {{ addForm.name }}（已存在）
+          </span>
           <span v-else>{{ addForm.name }}{{ addForm.industry }}</span>
         </a-form-item>
 
@@ -78,15 +86,26 @@ import { computed, ref, watch, onMounted, reactive, nextTick } from "vue"
 import { round, cloneDeep, isEqual } from "lodash-es"
 import useStockZcw from "@/hooks/useStockZcw"
 import useExcel from "@/hooks/useExcel"
-import {  searchStockCycle, deleteStockCycle, addStockCycle } from "@/api"
+import { searchStockCycle, deleteStockCycle, addStockCycle } from "@/api"
 import { message } from "ant-design-vue"
 import zcwTable from "@/components/zcw-table.vue"
 const store = useStore()
 
 const state = reactive({
   codeList: [],
-  isEditShow:false
+  isEditShow: false
 })
+const codeRef = ref(null)
+watch(
+  () => state.isEditShow,
+  () => {
+    if (state.isEditShow) {
+      setTimeout(() => {
+        codeRef.value.focus()
+      }, 100)
+    }
+  }
+)
 
 const addFormObj = {
   code: "",
@@ -121,14 +140,10 @@ const onDeleteStock = async (code) => {
   const { errcode, data } = await deleteStockCycle(params)
   if (errcode == 0) {
     message.success("删除成功")
-    state.codeList = state.codeList.filter((item) => item!=code)
+    state.codeList = state.codeList.filter((item) => item != code)
     searchStockList(state.codeList)
   }
 }
-
-
-
-
 
 // 添加行业股票
 const onAddStock = async () => {
@@ -149,7 +164,7 @@ const onAddStock = async () => {
       message.error("新增股票失败")
       return
     }
-  }else{
+  } else {
     const res = await onEditStock(addForm.value)
     if (!res) {
       message.error("修改股票失败")
@@ -157,7 +172,7 @@ const onAddStock = async () => {
     }
   }
   let params = {
-    code,
+    code
   }
   const { errcode, data } = await addStockCycle(params)
   if (errcode == 0) {
@@ -167,8 +182,6 @@ const onAddStock = async () => {
     onSearchCycle()
   }
 }
-
-
 
 // 查询code列表
 const onSearchCycle = async () => {

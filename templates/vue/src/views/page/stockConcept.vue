@@ -97,6 +97,7 @@
             style="width: 35%"
             placeholder="股票代码"
             @change="onCodeChange(addForm)"
+            ref="codeRef"
           />
           &nbsp;
 
@@ -172,6 +173,18 @@ const state = reactive({
   isEditShow: false,
   stocksCodeList: []
 })
+
+const codeRef = ref(null)
+watch(
+  () => state.isEditShow,
+  () => {
+    if (state.isEditShow) {
+      setTimeout(() => {
+        codeRef.value.focus()
+      }, 100)
+    }
+  }
+)
 
 const addFormObj = {
   code: "",
